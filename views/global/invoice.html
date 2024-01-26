@@ -25,17 +25,17 @@
             <i class="fas fa-file-invoice"></i>
         </button>
 
-        <div class="col-md-8 offset-md-2">
+        <div class="col-md-12 px-5">
             <div class="row">
 
                 <!-- Logo Div Start -->
-                <div class="col-12 d-flex justify-content-end mt-4">
+                <!-- <div class="col-12 d-flex justify-content-end mt-4">
                     <img src="/Invoice/assets/images/Layer_1.svg" />
-                </div>
+                </div> -->
                 <!-- Logo Div End -->
 
                 <!-- Customer Details Div Start -->
-                <div class="col-12 mt-4">
+                <div class="col-12 mt-4" style="margin-top: 200px !important;">
                     <div class="row">
 
                         <div class="col-3 row">
@@ -77,9 +77,9 @@
                             <thead>
                                 <tr>
                                     <th class="table-header">Item #</th>
-                                    <th class="table-header ">Description</th>
-                                    <th class="table-header ">Unit Price</th>
-                                    <th class="table-header ">Amount</th>
+                                    <th class="table-header">Description</th>
+                                    <th class="table-header" style="text-align: end;">Unit Price</th>
+                                    <th class="table-header" style="text-align: end;">Amount</th>
                                 </tr>
                             </thead>
 
@@ -102,7 +102,7 @@
         <div class="row">
 
             <!-- Payment Div Start -->
-            <div class="col-md-8 offset-md-2 mb-5">
+            <div class="col-md-12 px-5" style="margin-bottom: 200px !important;">
                 <div class="row">
 
                     <div class="col-12">
@@ -139,15 +139,15 @@
                                 <div class="row g-1">
 
 
-                                    <div class="col-8 offset-4">
+                                    <div class="col-12 ">
                                         <label class="form-label">Sub total: <b><span id="subTotal"></span></b></label>
                                     </div>
 
-                                    <div id="paidAmountDiv" class="col-8 offset-4">
+                                    <div id="paidAmountDiv" class="col-12 ">
                                         <label class="form-label">Paid amount: <b><span
                                                     id="paidAmount"></span></b></label>
                                     </div>
-                                    <div class="col-8 offset-4">
+                                    <div class="col-12 ">
                                         <label class="form-label">Total: <b><span id="totalPrice"></span></b></label>
                                     </div>
                                     <!-- 
@@ -177,14 +177,14 @@
             <!-- Payment Div End -->
 
             <!-- Footer Div Start -->
-            <div class="col-12 margin-top-80">
+            <!-- <div class="col-12 margin-top-80">
                 <div class="row">
 
-                    <!-- Color Box Div Start -->
+                    
                     <div class="col-1 footer-color-box "></div>
-                    <!-- Color Box Div End -->
+                   
 
-                    <!-- Details Div Star -->
+                    
                     <div class="col-8 ms-1">
                         <div class="row">
                             <label class="form-labe font-size-16 font-weight">NB ARTISAN HERITAGE PRIVATE
@@ -195,10 +195,10 @@
                             <label class="form-label font-size-14">info@queekuweni,com | queenkuweni.com</label>
                         </div>
                     </div>
-                    <!-- Details Div End -->
+                    
 
                 </div>
-            </div>
+            </div> -->
             <!-- Footer Div End -->
 
         </div>
@@ -242,8 +242,8 @@
                                     <tr>
                                         <td class="table-header">${data.data.items[i].product}</td>
                                         <td class="table-header">${data.data.items[i].product_name}</td>
-                                        <td class="table-header">Rs.${data.data.items[i].price}</td>
-                                        <td class="table-header">Rs.${data.data.items[i].price * data.data.items[i].qty}</td>
+                                        <td class="table-header" style="text-align: end;">Rs.${data.data.items[i].price}</td>
+                                        <td class="table-header" style="text-align: end;">Rs.${data.data.items[i].price * data.data.items[i].qty}</td>
                                     </tr>`;
                             subTotal += (data.data.items[i].price * data.data.items[i].qty);
                             if (i + 1 === data.data.items.length) {
