@@ -42,14 +42,19 @@
                                     <div class="col-12">
                                         <div class="row">
 
-                                            <div class="col-md-12 mb-3">
+                                            <div class="col-md-4 mb-3">
+                                                <label class="form-label">Product ID</label>
+                                                <input min="0" class="form-control" id="productId" type="text">
+                                            </div>
+
+                                            <div class="col-md-4 mb-3">
                                                 <label class="form-label">Product Name</label>
                                                 <div class="form-group">
                                                     <input min="0" class="form-control" id="productName" type="text">
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4 mb-3">
+                                            <div class="d-none col-md-4 mb-3">
                                                 <label class="form-label">Product Type</label>
                                                 <div class="form-group">
                                                     <select class="form-control" id="productType">
@@ -67,6 +72,26 @@
                                                 </div>
                                             </div>
 
+                                            <div class="col-md-2 mb-3">
+                                                <label class="form-label">Size</label>
+                                                <input min="0" class="form-control" id="productSize" type="text">
+                                            </div>
+
+                                            <div class="col-md-2 mb-3">
+                                                <label class="form-label">Color</label>
+                                                <input min="0" class="form-control" id="productColor" type="text">
+                                            </div>
+
+                                            <div class="col-md-2 mb-3">
+                                                <label class="form-label">Stock</label>
+                                                <input min="0" class="form-control" id="productStock" type="text">
+                                            </div>
+
+                                            <div class="col-md-2 mb-3" id="priceInputField">
+                                                <label class="form-label">Price</label>
+                                                <input min="0" class="form-control" id="productPrice" type="text">
+                                            </div>
+
                                             <div class="col-md-4 mb-3">
                                                 <label class="form-label">Product Sub Category</label>
                                                 <div class="form-group">
@@ -74,21 +99,6 @@
                                                         <option selected disabled>Select Sub Category</option>
                                                     </select>
                                                 </div>
-                                            </div>
-
-                                            <div class="col-md-4 mb-3">
-                                                <label class="form-label">Stock</label>
-                                                <input min="0" class="form-control" id="productStock" type="text">
-                                            </div>
-
-                                            <div class="col-md-4 mb-3">
-                                                <label class="form-label">Product ID</label>
-                                                <input min="0" class="form-control" id="productId" type="text">
-                                            </div>
-
-                                            <div class="col-md-4 mb-3" id="priceInputField">
-                                                <label class="form-label">Price</label>
-                                                <input min="0" class="form-control" id="productPrice" type="text">
                                             </div>
 
                                             <div class="col-12 d-flex justify-content-end mb-3">
@@ -126,7 +136,7 @@
                 var id = parts[parts.length - 1];
 
                 // Product View Function Start
-                function getProduct() {
+                function getProduct(subCategoryLoad =  false) {
                     $.ajax({
                         url: '/api/v1/product/view',
                         method: 'POST',
@@ -138,14 +148,18 @@
                             if (data.status === true || data.status === "true") {
 
                                 $('#productName').val(data.data.name);
+                                $('#productColor').val(data.data.color);
+                                $('#productSize').val(data.data.size);
                                 $('#productType').val(data.data.type);
                                 $('#productCategory').val(data.data.category);
-                                $('#productSubCategory').val(data.data.sub_category);
+                                document.getElementById("productSubCategory").value = data.data.sub_category
                                 $('#productStock').val(data.data.stock);
                                 $('#productId').val(data.data.product_id);
                                 $('#productPrice').val(data.data.price);
-
-                                productSubCategory(data.data.category)
+                                if(subCategoryLoad) {
+                                    console.log("loading sub category")
+                                    productSubCategory(data.data.category)
+                                }
 
                             } else {
                                 iziToast.error({
@@ -163,7 +177,7 @@
                         }
                     });
                 }
-                getProduct()
+                
                 // Product View Function Start
 
 
@@ -189,6 +203,7 @@
 
 
                                 });
+                                getProduct()
 
                             } else {
                                 console.log(data);
@@ -216,7 +231,6 @@
                         data: {},
                         success: function (data) {
                             if (data.status === true || data.status === "true") {
-                                console.log(data);
 
                                 let details = data.data;
 
@@ -229,6 +243,7 @@
 
 
                                 });
+                                getProduct(true);
 
                             } else {
                                 console.log(data);
@@ -263,7 +278,6 @@
                         },
                         success: function (data) {
                             if (data.status === true || data.status === "true") {
-                                console.log(data);
 
                                 let details = data.data;
 
@@ -279,6 +293,7 @@
 
                                     document.getElementById('productSubCategory').appendChild(option);
                                 });
+                                setTimeout(()=>{getProduct()}, 100)
 
                             } else {
                                 console.log(data);
@@ -308,6 +323,8 @@
 
                             "id": id,
                             "name": $('#productName').val(),
+                            "color": $('#productColor').val(),
+                            "size": $('#productSize').val(),
                             "stock": $('#productStock').val(),
                             "price": $('#productPrice').val(),
                             "type": $('#productType').val(),

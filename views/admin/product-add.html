@@ -42,14 +42,19 @@
                                     <div class="col-12">
                                         <div class="row">
 
-                                            <div class="col-md-12 mb-3">
+                                            <div class="col-md-4 mb-3">
+                                                <label class="form-label">Product ID</label>
+                                                <input min="0" class="form-control" id="productId" type="text">
+                                            </div>
+
+                                            <div class="col-md-4 mb-3">
                                                 <label class="form-label">Product Name</label>
                                                 <div class="form-group">
                                                     <input min="0" class="form-control" id="productName" type="text">
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4 mb-3">
+                                            <div class="d-none col-md-4 mb-3">
                                                 <label class="form-label">Product Type</label>
                                                 <div class="form-group">
                                                     <select class="form-control" id="productType">
@@ -66,6 +71,26 @@
                                                     </select>
                                                 </div>
                                             </div>
+ 
+                                            <div class="col-md-2 mb-3">
+                                                <label class="form-label">Size</label>
+                                                <input min="0" class="form-control" id="productSize" type="text">
+                                            </div> 
+
+                                            <div class="col-md-2 mb-3">
+                                                <label class="form-label">Color</label>
+                                                <input min="0" class="form-control" id="productColor" type="text">
+                                            </div>
+
+                                            <div class="col-md-2 mb-3">
+                                                <label class="form-label">Stock</label>
+                                                <input min="0" class="form-control" id="productStock" type="text">
+                                            </div>
+
+                                            <div class="col-md-2 mb-3" id="priceInputField">
+                                                <label class="form-label">Price</label>
+                                                <input min="0" class="form-control" id="productPrice" type="text">
+                                            </div>
 
                                             <div class="col-md-4 mb-3">
                                                 <label class="form-label">Product Sub Category</label>
@@ -74,21 +99,6 @@
                                                         <option selected disabled>Select Sub Category</option>
                                                     </select>
                                                 </div>
-                                            </div>
-
-                                            <div class="col-md-4 mb-3">
-                                                <label class="form-label">Stock</label>
-                                                <input min="0" class="form-control" id="productStock" type="text">
-                                            </div>
-
-                                            <div class="col-md-4 mb-3">
-                                                <label class="form-label">Product ID</label>
-                                                <input min="0" class="form-control" id="productId" type="text">
-                                            </div>
-
-                                            <div class="col-md-4 mb-3" id="priceInputField">
-                                                <label class="form-label">Price</label>
-                                                <input min="0" class="form-control" id="productPrice" type="text">
                                             </div>
 
                                             <div class="col-12 d-flex justify-content-end mb-3">
@@ -136,6 +146,8 @@
                             "stock": $('#productStock').val(),
                             "productId": $('#productId').val(),
                             "price": $('#productPrice').val(),
+                            "color": $('#productColor').val(),
+                            "size": $('#productSize').val(),
 
                         }),
                         success: function (data) {
@@ -180,7 +192,6 @@
                         data: {},
                         success: function (data) {
                             if (data.status === true || data.status === "true") {
-                                console.log(data);
 
                                 let details = data.data;
 
@@ -189,6 +200,9 @@
                                     let option = document.createElement('option');
                                     option.value = detail.id;
                                     option.textContent = detail.name;
+                                    if(detail.name.toLowerCase() === "readymate"){
+                                        option.selected = true;
+                                    }
                                     document.getElementById('productType').appendChild(option);
 
 

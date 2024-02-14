@@ -43,8 +43,10 @@
                                                 <thead class="table-dark">
                                                     <tr>
                                                         <th class="text-white">#</th>
-                                                        <th class="text-white">Name</th>
                                                         <th class="text-white">Product ID</th>
+                                                        <th class="text-white">Name</th>
+                                                        <th class="text-white">Color</th>
+                                                        <th class="text-white">Size</th>
                                                         <th class="text-white">Stock</th>
                                                         <th class="text-white">Price</th>
                                                         <th class="text-white">Type</th>
@@ -108,8 +110,10 @@
                                     document.getElementById("productListTable").innerHTML += `
                                         <tr>
                                             <td>0${number}</td>
-                                            <td>${node[i].name}</td>
                                             <td>${node[i].product_id}</td>
+                                            <td>${node[i].name}</td>
+                                            <td>${node[i].color}</td>
+                                            <td>${node[i].size}</td>
                                             <td>${node[i].stock}</td>
                                             <td>LKR ${node[i].price}</td>
                                             <td>${node[i].type_name}</td>
