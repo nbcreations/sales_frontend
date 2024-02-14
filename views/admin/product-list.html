@@ -49,7 +49,7 @@
                                                         <th class="text-white">Size</th>
                                                         <th class="text-white">Stock</th>
                                                         <th class="text-white">Price</th>
-                                                        <th class="text-white">Type</th>
+                                                        <!-- <th class="text-white">Type</th> -->
                                                         <th class="text-white">Category</th>
                                                         <th class="text-white">Sub Category</th>
                                                         <th class="text-white">Action</th>
@@ -88,8 +88,8 @@
         <%- script_tags %>
 
             <script>
-               
-               function productList() {
+
+                function productList() {
 
                     $.ajax({
                         url: '/api/v1/product/list',
@@ -107,6 +107,8 @@
                                 for (let i = 0; i < node.length; i++) {
                                     let number = i + 1;
 
+                                    // <td>${node[i].type_name}</td>
+
                                     document.getElementById("productListTable").innerHTML += `
                                         <tr>
                                             <td>0${number}</td>
@@ -115,8 +117,7 @@
                                             <td>${node[i].color}</td>
                                             <td>${node[i].size}</td>
                                             <td>${node[i].stock}</td>
-                                            <td>LKR ${node[i].price}</td>
-                                            <td>${node[i].type_name}</td>
+                                            <td>LKR ${node[i].price}</td>   
                                             <td>${node[i].category_name}</td>
                                             <td>${node[i].sub_category_name}</td>
                                             <td class="text-end">
@@ -214,7 +215,7 @@
                         ],
                     });
                 }
-            
+
             </script>
 </body>
 

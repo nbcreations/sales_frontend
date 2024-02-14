@@ -129,7 +129,6 @@
                 <div class="modal-content">
                     <div class="modal-header bg-black">
                         <h1 class="qk-modal-title mb-0" id="subCategoryModelTitle">CAPS</h1>
-
                     </div>
                     <div class="modal-body  overflow-x-scroll">
                         <table class="table border-black">
@@ -255,7 +254,7 @@
 
                                 document.getElementById("subCategoryViewCard").innerHTML += `
                                     
-                                    <div class="col" onclick="productListLoad(${node[i].id});">
+                                    <div class="col" onclick="productListLoad('${node[i].id}', '${node[i].name}');">
 
                                         <div class="card bg-dark py-3 px-4 rounded-4 h-100">
                                             <div class="justify-content-center d-flex align-items-center">
@@ -292,7 +291,12 @@
             // Sub Category Load Function End
 
             // Product Load Function Start
-            function productListLoad(id) {
+            function productListLoad(id, name) {
+                console.log("🚀 ~ productListLoad ~ id:", id)
+                
+            console.log("🚀 ~ productListLoad ~ name:", name)
+
+                document.getElementById("subCategoryModelTitle").innerHTML = name;
 
                 $.ajax({
                     url: '/api/v1/product/sales-list',
@@ -310,6 +314,7 @@
                             const node = data.data
 
                             document.getElementById("productListTable").innerHTML = "";
+
                             let attributeName = "";
                             if (type == 1) {
                                 attributeName = "disabled";
