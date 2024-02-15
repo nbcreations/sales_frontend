@@ -159,6 +159,7 @@
                 var currentUrl = window.location.href;
                 var parts = currentUrl.split('/');
                 var id = parts[parts.length - 1];
+                let category = 0;
 
                 // Sub Category View Function Start
                 function getProductSubCategory() {
@@ -173,7 +174,8 @@
                             if (data.status === true || data.status === "true") {
 
                                 $('#subCategoryName').val(data.data.name);
-                                $('#productCategory').val(data.data.category);
+                                category = data.data.category;
+                                productCategory();
                                 const container = document.getElementById('imageContainer');
                                 const image = new Image();
                                 image.src = data.data.img_url;
@@ -217,13 +219,17 @@
 
                                 let details = data.data;
 
+                                let i = 0;
                                 details.forEach(function (detail) {
 
                                     let option = document.createElement('option');
                                     option.value = detail.id;
                                     option.textContent = detail.name;
                                     document.getElementById('productCategory').appendChild(option);
-
+                                    i += 1;
+                                    if(i === details.length) {
+                                        $('#productCategory').val(category);
+                                    }
 
                                 });
 
