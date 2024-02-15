@@ -17,6 +17,7 @@ const sidebar =
                 <a class="nav-link" href="/order-payment">
                     <div class="nav-link-icon"><i class="fa-solid fa-money-bill-wave"></i></div>Order Payment
                 </a>
+                -->
                 
                 <div class="sidenav-menu-heading">Product Management</div>
                 
@@ -27,7 +28,6 @@ const sidebar =
                 <a class="nav-link" href="/product-add">
                     <div class="nav-link-icon"><i class="fa-solid fa-layer-group"></i></div>Product Add
                 </a>
-                -->
 
 
                 <!-- Sidenav Menu Heading (Core)-->
