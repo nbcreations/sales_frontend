@@ -19,9 +19,10 @@ const sidebar =
                     <div class="nav-link-icon"><i class="fa-solid fa-money-bill-wave"></i></div>Order Payment
                 </a>
                 
-                <!-- Sidenav Menu Heading (Core)-->
+                
+                <!--
                 <div class="sidenav-menu-heading">Product Management</div>
-                <!-- Sidenav Accordion (Dashboard)-->
+                
                 
                 <a class="nav-link" href="/product">
                     <div class="nav-link-icon"><i class="fa-solid fa-gift"></i></div>Product List
@@ -33,9 +34,9 @@ const sidebar =
 
 
 
-                <!-- Sidenav Menu Heading (Core)-->
+               
                 <div class="sidenav-menu-heading">Sub Category Management</div>
-                <!-- Sidenav Accordion (Dashboard)-->
+                
                 
                 <a class="nav-link" href="/sub-category-list">
                     <div class="nav-link-icon"><i class="fa-solid fa-gift"></i></div>Sub Category List
@@ -44,6 +45,8 @@ const sidebar =
                 <a class="nav-link" href="/sub-category-add">
                     <div class="nav-link-icon"><i class="fa-solid fa-gift"></i></div>Sub Category Add
                 </a>
+
+                -->
 
             </div>
 
