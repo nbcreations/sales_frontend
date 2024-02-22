@@ -146,7 +146,6 @@ router.post("/api/upload", upload.single('image'), async (req, res) => {
         const formData = new FormData();
         // const blob = new Blob([file.buffer], { type: file.mimetype });
         formData.append('image', file.buffer, { filename: file.originalname });
-        formData.append('image', blob, file.originalname);
         formData.append('imageId', data.imageId);
         formData.append('resultId', data.resultId);
 
