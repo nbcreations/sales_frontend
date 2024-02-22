@@ -8,7 +8,7 @@ const {authorize, authorize2} = require('./../services/authorize');
 const validate      = require('./../validation/api.validate'); // Input validations
 const multer = require('multer');
 const axios = require('axios');
-
+const FormData = require('form-data');
 
 // Set up Multer to handle file uploads
 const storage = multer.memoryStorage();
@@ -143,8 +143,8 @@ router.post("/api/upload", upload.single('image'), async (req, res) => {
 
         // Prepare the FormData for the Axios request
         const formData = new FormData();
-        const blob = new Blob([file.buffer], { type: file.mimetype });
-        formData.append('image', blob, file.originalname);
+        // const blob = new Blob([file.buffer], { type: file.mimetype });
+        formData.append('image', file.buffer, { filename: file.originalname });
         formData.append('imageId', data.imageId);
         formData.append('resultId', data.resultId);
 
