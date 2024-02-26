@@ -4,20 +4,6 @@ const sidebar =
     <nav class="sidenav shadow-right sidenav-light">
         <div class="sidenav-menu">
             <div class="nav accordion" id="accordionSidenav">
-
-
-
-                <!-- Sidenav Menu Heading (Core)
-                <div class="sidenav-menu-heading">Order Management</div>
-                
-                <a class="nav-link" href="/orders">
-                    <div class="nav-link-icon"><i class="fa-solid fa-gift"></i></div>Order List
-                </a>
-
-                <a class="nav-link" href="/order-payment">
-                    <div class="nav-link-icon"><i class="fa-solid fa-money-bill-wave"></i></div>Order Payment
-                </a>
-                -->
                 
                 <div class="sidenav-menu-heading">Product Management</div>
                 
