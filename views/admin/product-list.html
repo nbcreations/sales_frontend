@@ -4,6 +4,7 @@
 <head>
     <title>Product Management</title>
     <%-header_tags %>
+    <link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
 </head>
 
 <body class="nav-fixed">
@@ -37,35 +38,47 @@
                                 </div>
                                 <div class="card-body">
 
-                                    <div class="row mt-4">
-                                        <div class="col">
-                                            <table class=" table">
-                                                <thead class="table-dark">
+                                    <div class="datatable">
+                                        <table class="table table-striped table-bordered table-hover" id="dataTable"
+                                        width="100%" cellspacing="0">
+                                                <thead>
                                                     <tr>
-                                                        <th class="text-white">#</th>
-                                                        <th class="text-white">Product ID</th>
-                                                        <th class="text-white">Name</th>
-                                                        <th class="text-white">Color</th>
-                                                        <th class="text-white">Size</th>
-                                                        <th class="text-white">Stock</th>
-                                                        <th class="text-white">Price</th>
-                                                        <!-- <th class="text-white">Type</th> -->
-                                                        <th class="text-white">Category</th>
-                                                        <th class="text-white">Sub Category</th>
-                                                        <th class="text-white">Action</th>
+                                                        <th>#</th>
+                                                        <th>Product ID</th>
+                                                        <th>Name</th>
+                                                        <th>Color</th>
+                                                        <th>Size</th>
+                                                        <th>Stock</th>
+                                                        <th>Price</th>
+                                                        <!-- <th>Type</th> -->
+                                                        <th>Category</th>
+                                                        <th>Sub Category</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody id="productListTable"></tbody>
+                                                <tbody id="productListTable">
+                                                    <% data.forEach(function(item, index) { %>
+                                                        <tr>
+                                                            <td><%= index + 1 %></td>
+                                                            <td><%= item.product_id %></td>
+                                                            <td><%= item.name %></td>
+                                                            <td><%= item.color %></td>
+                                                            <td><%= item.size %></td>
+                                                            <td><%= item.stock %></td>
+                                                            <td>LKR <%= item.price %></td>   
+                                                            <td><%= item.category_name %></td>
+                                                            <td><%= item.sub_category_name %></td>
+                                                            <td class="text-end">
+                                                                <a href="/product-edit/<%= item.id %>" class="btn btn-warning btn-sm"><i class="fa-regular fa-pen-to-square"></i></a>
+                                                                <a onclick="deleteData('<%= item.id %>')" class="btn btn-danger btn-sm"><i class="fa-regular fa-trash-can"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                    <% }); %>
+                                                </tbody>
                                             </table>
-
-                                            <div class="row">
-                                                <div class="col d-flex justify-content-center">
-                                                    <div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
+
+                                    
 
                                 </div>
                             </div>
@@ -86,67 +99,11 @@
                 </div>
         </div>
         <%- script_tags %>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
 
             <script>
-
-                function productList() {
-
-                    $.ajax({
-                        url: '/api/v1/product/list',
-                        method: 'POST',
-                        contentType: 'application/json',
-                        data: {},
-                        success: function (data) {
-                            if (data.status === true || data.status === "true") {
-
-                                const node = data.data
-                                console.log("🚀 ~ file: gift-voucher-list.html:99 ~ productList ~ node:", node)
-
-                                document.getElementById("productListTable").innerHTML = ""
-
-                                for (let i = 0; i < node.length; i++) {
-                                    let number = i + 1;
-
-                                    // <td>${node[i].type_name}</td>
-
-                                    document.getElementById("productListTable").innerHTML += `
-                                        <tr>
-                                            <td>0${number}</td>
-                                            <td>${node[i].product_id}</td>
-                                            <td>${node[i].name}</td>
-                                            <td>${node[i].color}</td>
-                                            <td>${node[i].size}</td>
-                                            <td>${node[i].stock}</td>
-                                            <td>LKR ${node[i].price}</td>   
-                                            <td>${node[i].category_name}</td>
-                                            <td>${node[i].sub_category_name}</td>
-                                            <td class="text-end">
-                                                <a href="/product-edit/${node[i].id}" class="btn btn-warning btn-sm"><i class="fa-regular fa-pen-to-square"></i></a>
-                                                <a onclick="deleteData('${node[i].id}')" class="btn btn-danger btn-sm"><i class="fa-regular fa-trash-can"></i></a>
-                                            </td>
-                                        </tr>
-                                `
-                                }
-
-                            } else {
-
-                                iziToast.error({
-                                    title: 'Error',
-                                    message: data.message,
-                                });
-                            }
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            console.error('Error making the request:', textStatus, errorThrown);
-                            iziToast.error({
-                                title: 'Error',
-                                message: 'An error occurred while processing your request.',
-                            });
-                        }
-                    });
-                }
-
-                productList()
 
                 function deleteData(resultId) {
                     iziToast.show({

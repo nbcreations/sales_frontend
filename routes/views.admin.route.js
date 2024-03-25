@@ -12,7 +12,8 @@ const { header_tags } = require("./../views/components/header_tags");
 const { script_tags } = require("./../views/components/script_tags");
 const { sidebar } = require("../views/components/sidebar");
 const { top_header } = require("../views/components/top_header");
-
+const {render_data_post, render_data} = require("./../services/render");
+const {authorize} = require("./../services/authorize");
 const dotenv = require('dotenv');
 dotenv.config({ path: '.env/config.env' });
 
@@ -45,10 +46,14 @@ router.get("/", async (req, res) => {
 });
 
 
-router.get("/product", async (req, res) => {
+router.get("/product", authorize, async (req, res) => {
 
     try {
-
+        let data = await render_data_post("/api/v1/product/list", req.authToken, {});
+        if(!data.status){
+            res.redirect("/");
+            return;
+        }
         res.render(
             admin + "product-list.html",
             {
@@ -56,6 +61,7 @@ router.get("/product", async (req, res) => {
                 script_tags: script_tags,
                 top_header: top_header,
                 sidebar: sidebar,
+                data: data.data
             }
         );
 
